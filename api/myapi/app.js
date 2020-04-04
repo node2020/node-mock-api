@@ -4,12 +4,15 @@ const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
+const koaBody = require('koa-body')
 const logger = require('koa-logger')
+
 
 const index = require('./routes/index')
 const users = require('./routes/users')
 const demo = require('./routes/demo')
 const mno_service = require('./routes/mno-service')
+const file = require('./routes/file')
 
 // error handler
 onerror(app)
@@ -21,7 +24,12 @@ app.use(bodyparser({
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
-
+app.use(koaBody({
+  multipart: true,
+  formidable: {
+    maxFileSize: 200*1024*1024    // 设置上传文件大小最大限制，默认2M
+  }
+}))
 app.use(views(__dirname + '/views', {
   extension: 'ejs'
 }))
@@ -37,8 +45,9 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
-app.use(demo.routes(), users.allowedMethods())
-app.use(mno_service.routes(), users.allowedMethods())
+app.use(demo.routes(), demo.allowedMethods())
+app.use(mno_service.routes(), mno_service.allowedMethods())
+app.use(file.routes(), file.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
