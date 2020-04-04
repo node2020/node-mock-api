@@ -7,7 +7,9 @@ router.prefix('/file')
 router.post('/upload', function (ctx, next) {
   let status= "SUCCEED"
   let message = "文件上传成功"
-
+  //接受一个from-data参数
+  let name = ctx.request.body.name
+  console.log("name",name)
   // 上传单个文件
   const file = ctx.request.files.file; // 获取上传文件
   if(file==null||file==undefined){
