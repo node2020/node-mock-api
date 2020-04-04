@@ -6,7 +6,7 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const koaBody = require('koa-body')
 const logger = require('koa-logger')
-
+const koaStatic = require('koa-static')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
@@ -23,7 +23,7 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/public'))
+app.use(koaStatic(__dirname + '/public'))
 app.use(koaBody({
   multipart: true,
   formidable: {
