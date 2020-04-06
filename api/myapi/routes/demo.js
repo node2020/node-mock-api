@@ -3,7 +3,7 @@ const router = require('koa-router')()
 router.prefix('/demo')
 
 //get 请求
-router.get('/list', function (ctx, next) {
+router.get('/get', function (ctx, next) {
     let url = ctx.url;
 
     //从request中获取GET请求
@@ -12,7 +12,7 @@ router.get('/list', function (ctx, next) {
     let body = request.body;
     let method = ctx.method;
     let req_querystring = request.querystring;
-    console.log("a", req_query.name)
+    console.log("name: ", req_query.name)
 
     //从上下文中直接获取
     let ctx_query = ctx.query;
@@ -30,8 +30,21 @@ router.get('/list', function (ctx, next) {
     }
 })
 
-router.get('/bar', function (ctx, next) {
-    ctx.body = 'this is a users/bar response'
+//post 请求
+router.post('/post', function (ctx, next) {
+    let body = ctx.request.body;
+    let method = ctx.method;
+    let url = ctx.request.url;
+    let status = 'SUCCEED'
+    let data = {
+        body,
+        method,
+        url
+    }
+   ctx.body = {
+        status,
+        data
+    }
 })
 
 module.exports = router

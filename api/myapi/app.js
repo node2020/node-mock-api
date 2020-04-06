@@ -3,7 +3,8 @@ const app = new Koa()
 const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
-const bodyparser = require('koa-bodyparser')
+//和koa-body(上传文件用)冲突
+// const bodyparser = require('koa-bodyparser')
 const koaBody = require('koa-body')
 const logger = require('koa-logger')
 const koaStatic = require('koa-static')
@@ -18,9 +19,9 @@ const file = require('./routes/file')
 onerror(app)
 
 // middlewares
-app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
-}))
+// app.use(bodyparser({
+//   enableTypes:['json', 'form', 'text']
+// }))
 app.use(json())
 app.use(logger())
 app.use(koaStatic(__dirname + '/public'))
