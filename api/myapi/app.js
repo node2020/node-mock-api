@@ -12,8 +12,9 @@ const koaStatic = require('koa-static')
 const index = require('./routes/index')
 const users = require('./routes/users')
 const demo = require('./routes/demo')
-const mno_service = require('./routes/mno-service')
+const tima_tsp = require('./routes/tima-tsp')
 const file = require('./routes/file')
+const ingeek = require('./routes/ingeek')
 
 // error handler
 onerror(app)
@@ -47,8 +48,9 @@ app.use(async (ctx, next) => {
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(demo.routes(), demo.allowedMethods())
-app.use(mno_service.routes(), mno_service.allowedMethods())
+app.use(tima_tsp.routes(), tima_tsp.allowedMethods())
 app.use(file.routes(), file.allowedMethods())
+app.use(ingeek.routes(), ingeek.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

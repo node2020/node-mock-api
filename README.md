@@ -21,7 +21,13 @@
 
 　2. koa2 demo -e --ejs     后面是使用ejs模板的
 
-　3. cd到demo文件下，输入命令npm install
+　3. cd到node/node-mock-api/api/myapi文件下，输入命令npm install
 
 　4. 运行项目 npm start
+```
+
+###新增一个mock
+```
+1. routes 文件下新增route文件名(不带后缀)
+2. app.js 注册routes文件
 ```

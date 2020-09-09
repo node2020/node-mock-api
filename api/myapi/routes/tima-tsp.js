@@ -1,9 +1,9 @@
 const router = require('koa-router')()
-router.prefix('/mno-service')
+router.prefix('')
 
 
 //叠加套餐
-router.post('/internal/asynchronousSim/giveStoreCommodity', function (ctx, next) {
+router.post('/mno-service/internal/onlineStore/giveStoreCommodity', function (ctx, next) {
     let status = 'SUCCEED'
     let errorCode = ""
     let errorMessage = ""
@@ -28,6 +28,12 @@ router.post('/internal/asynchronousSim/giveStoreCommodity', function (ctx, next)
         errorCode,
         errorMessage
     }
+})
+
+//叠加套餐
+router.get('/simulator/vehicle/token', function (ctx, next) {
+    //返回json格式
+    ctx.body ='{"lastRequested":"2020-03-31T05:33:38.329Z","httpStatus":200,"error":null,"value":{"phoneNumber":"18030567713"},"version":"1.0.0","requestStatus":"CURRENT","status":0}'
 })
 
 module.exports = router
